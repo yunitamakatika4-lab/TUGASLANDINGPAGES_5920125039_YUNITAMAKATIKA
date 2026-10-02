@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STI UNIERA</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box} html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#020a1e;color:white;min-height:100vh;overflow-x:hidden;position:relative}
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background: 
+      linear-gradient(rgba(2,10,30,0.38), rgba(2,10,30,0.48)),
+      url('background.jpg') center/cover no-repeat fixed;
+    filter: brightness(1.15) contrast(1.05);
+}
+.header{height:84px;border:1px solid rgba(125,211,252,0.35);background:rgba(8,15,35,0.6);backdrop-filter:blur(16px);margin:18px;border-radius:20px;position:sticky;top:18px;z-index:30;box-shadow:0 0 30px rgba(14,165,233,0.2)}
+.header-inner{max-width:1320px;margin:auto;height:100%;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;gap:12px;align-items:center;font-weight:800;font-size:20px;letter-spacing:-0.5px;text-shadow:0 0 12px #0ea5e9}
+.logo img{width:48px;height:48px;border-radius:12px;object-fit:contain;background:rgba(0,195,255,0.1);border:1px solid rgba(125,211,252,0.4);padding:4px;display:block}
+.nav{display:flex;gap:28px;align-items:center}
+.nav-item{position:relative}
+.nav-item>a{color:#e0f2fe;font-size:15px;font-weight:700;text-decoration:none;padding:8px 14px;border-radius:12px;display:flex;align-items:center;gap:6px;cursor:pointer;border:1px solid transparent;transition:0.25s}
+.nav-item>a.active{color:white;background:linear-gradient(135deg,#0ea5e9,#0284c7);border-color:rgba(125,211,252,0.5);box-shadow:0 0 20px rgba(14,165,233,0.5)}
+.nav-item:hover>a{color:#7dd3fc;border-color:rgba(125,211,252,0.3);background:rgba(14,165,233,0.12)}
+.arrow{font-size:12px;transition:0.3s}.nav-item:hover .arrow{transform:rotate(180deg)}
+.dropdown{position:absolute;top:54px;left:50%;transform:translateX(-50%) translateY(12px) scale(0.94);min-width:250px;background:rgba(10,25,50,0.96);backdrop-filter:blur(22px);border:1px solid rgba(125,211,252,0.4);border-radius:16px;padding:10px;opacity:0;pointer-events:none;transition:0.35s;transform-origin:top center;box-shadow:0 16px 50px rgba(0,0,0,0.5),0 0 30px rgba(14,165,233,0.2)}
+.nav-item:hover .dropdown{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0) scale(1)}
+.dropdown a{display:flex;gap:10px;padding:12px 14px;border-radius:10px;color:#bae6fd;text-decoration:none;font-size:14px;font-weight:600;transition:0.2s}
+.dropdown a:hover{background:rgba(14,165,233,0.22);color:white;transform:translateX(4px)}
+
+.hero{max-width:1320px;margin:auto;padding:50px 28px;display:flex;justify-content:space-between;gap:30px;align-items:stretch}
+.hero-left{width:48%;background:rgba(2,10,30,0.55);backdrop-filter:blur(14px);padding:32px;border-radius:20px;border:1px solid rgba(125,211,252,0.25);box-shadow:0 0 40px rgba(14,165,233,0.15);display:flex;flex-direction:column;justify-content:center}
+.badge{display:inline-flex;background:rgba(14,165,233,0.15);border:1px solid rgba(125,211,252,0.35);padding:6px 14px;border-radius:99px;font-size:11px;color:#7dd3fc;margin-bottom:18px;letter-spacing:0.6px}
+.hero-left h1{font-size:42px;line-height:1.05;font-weight:800;color:#7dd3fc;text-shadow:0 0 20px rgba(14,165,233,0.6)}
+.desc{color:#cbd5e1;margin-top:16px;font-size:13.5px;line-height:1.7}
+.btn-group{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn-daftar{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0ea5e9,#0284c7);padding:14px 28px;border-radius:12px;font-weight:800;font-size:14px;color:white;text-decoration:none;box-shadow:0 0 25px rgba(14,165,233,0.5);border:1px solid rgba(125,211,252,0.4);transition:0.3s}
+.btn-daftar:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(14,165,233,0.7)}
+.btn-outline{display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:1px solid rgba(125,211,252,0.3);padding:14px 26px;border-radius:12px;font-weight:700;font-size:14px;color:#bae6fd;text-decoration:none;backdrop-filter:blur(8px);transition:0.3s}
+.btn-outline:hover{background:rgba(14,165,233,0.15);color:white}
+
+.right{width:52%;display:flex;flex-direction:column;gap:16px}
+.card{border:1px solid rgba(125,211,252,0.3);background:rgba(8,20,45,0.65);backdrop-filter:blur(14px);border-radius:18px;padding:20px 22px;display:flex;gap:18px;align-items:center;box-shadow:0 0 25px rgba(14,165,233,0.12);transition:0.3s}
+.card:hover{transform:translateY(-2px);border-color:rgba(125,211,252,0.6);box-shadow:0 10px 35px rgba(14,165,233,0.22)}
+.card-icon{min-width:54px;width:54px;height:54px;border-radius:12px;background:rgba(14,165,233,0.15);border:1px solid rgba(125,211,252,0.25);display:grid;place-items:center;font-size:26px;color:#7dd3fc}
+.card h3{font-size:17px;font-weight:800;color:#7dd3fc}.card p{font-size:12.5px;color:#cbd5e1;margin-top:4px;line-height:1.5}
+
+@media(max-width:980px){.hero{flex-direction:column}.hero-left,.right{width:100%}.nav{display:none}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><img src="logo sti.jpeg" alt="Logo STI" onerror="this.style.display='none'">STI UNIERA</div>
+    <nav class="nav">
+      <div class="nav-item"><a class="active">Beranda</a></div>
+      <div class="nav-item"><a>Profil <span class="arrow">▾</span></a><div class="dropdown"><a href="#tentang">📘 Tentang Kami</a><a href="#visimisi">🎯 Visi Misi</a><a href="#dosen">👨‍🏫 Dosen</a></div></div>
+      <div class="nav-item"><a>Akademik <span class="arrow">▾</span></a><div class="dropdown"><a href="#prodi">🎓 Program Studi</a><a href="#kalender">📅 Kalender Akademik</a><a href="#elearning">💻 E-Learning</a></div></div>
+      <div class="nav-item"><a>Kontak <span class="arrow">▾</span></a><div class="dropdown"><a href="#alamat">📍 Alamat Kampus</a><a href="#email">✉️ Email</a><a href="#wa">💬 WhatsApp</a></div></div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="badge">UNIVERSITAS HALMAHERA • SISTEM & TEKNOLOGI INFORMASI</div>
+    <h1>Welcome to Sistem dan Teknologi Informasi Universitas Halmahera</h1>
+    <p class="desc">Mewujudkan pendidikan tinggi di bidang Sistem dan Teknologi Informasi yang inovatif, adaptif, dan berbasis riset untuk mendukung transformasi digital di wilayah Halmahera dan Indonesia Timur. Program studi kami menekankan pada pengembangan keahlian di bidang jaringan, data science, keamanan siber, dan teknologi informasi terapan.</p>
+    <div class="btn-group">
+      <a class="btn-daftar" href="#daftar">DAFTAR SEKARANG→</a>
+    </div>
+  </div>
+  <div class="right">
+    <div class="card"><div class="card-icon">🎓</div><div><h3>Program Studi</h3><p>S1 Sistem Informasi • S1 Teknologi Informasi • Kurikulum Berbasis MBKM & Industri 4.0</p></div></div>
+    <div class="card"><div class="card-icon">🖥️</div><div><h3>Fasilitas Lab</h3><p>Lab Jaringan & Keamanan Siber • Lab Data Science & AI • Lab IoT & Embedded System • Ruang Praktikum 24/7</p></div></div>
+    <div class="card"><div class="card-icon">📄</div><div><h3>Publikasi & Riset</h3><p>Jurnal STI UNIERA • Kolaborasi Riset Nasional • Inovasi Teknologi Tepat Guna • Publikasi Ilmiah Terindeks</p></div></div>
+  </div>
+</section>
+</body>
+</html>
